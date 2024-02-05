@@ -1,0 +1,6 @@
+GCP_PROJECT_ID=crucial-mender-411608
+GCP_ARTIFACT_REGISTRY_REPOSITORY_NAME=docker-registry
+VM_NAME=aiprojects-mlflow
+ZONE=europe-west3-a
+DOCKER_IMAGE_NAME=parts-prediction
+GCP_DOCKER_REGISTRY_URL=europe-west3-docker.pkg.dev/${GCP_PROJECT_ID}/${GCP_ARTIFACT_REGISTRY_REPOSITORY_NAME}/${DOCKER_IMAGE_NAME}

@@ -2,6 +2,7 @@ FROM python:3.10-slim
 
 ARG USER_ID
 ARG USER_NAME
+
 ENV HOME=/home/${USER_NAME} \
     VIRTUAL_ENV=/home/${USER_NAME}/venv
 ENV \
@@ -26,7 +27,8 @@ RUN addgroup --system --gid ${USER_ID} ${USER_NAME} \
     && useradd --system -m --no-log-init --home-dir ${HOME} --uid ${USER_ID} --gid ${USER_NAME} --groups ${USER_NAME} ${USER_NAME}
 
 RUN chown -R ${USER_NAME}:${USER_NAME} ${HOME}
-RUN mkdir -p /app && chown -R ${USER_NAME}:${USER_NAME} /app /tmp
+RUN mkdir -p /mlflow-artifact-store /mlflow-backend-store /app && chown -R ${USER_NAME}:${USER_NAME} /app /tmp /mlflow-artifact-store /mlflow-backend-store
+
 
 RUN curl -sSL https://install.python-poetry.org | python3 - --version 1.7.1
 
@@ -47,4 +49,7 @@ RUN chown -R ${USER_NAME} /*.sh && chmod +x /*.sh
 USER ${USER_NAME}
 
 COPY . /app/
+
+ENTRYPOINT [ "/bin/bash" ]
 CMD ["/startup-script.sh"]
+EXPOSE 6100 6101

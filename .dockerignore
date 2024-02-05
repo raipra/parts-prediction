@@ -2,6 +2,6 @@
 *
 
 !docker
-!cybulde
+!main
 !pyproject.toml
 !poetry.lock
