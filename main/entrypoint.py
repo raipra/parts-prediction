@@ -34,24 +34,23 @@ def run(config: "TrainerConfig") -> TransformerModule:
     run_name = config.infrastructure.mlflow.run_name
 
     with activate_mlflow(experiment_name=experiment_name, run_id=run_id, run_name=run_name) as _:
-        log_artifacts_for_reproducibility()
         """Train and checkpoint the model with highest F1; log that model to MLflow and
         return it."""
         model = TransformerModule(
-            pretrained_model=config.pretrained_model,
-            num_classes=config.num_classes,
-            lr=config.lr,
+            pretrained_model=config.trainer.pretrained_model,
+            num_classes=config.trainer.num_classes,
+            lr=config.trainer.lr,
         )
         datamodule = LexGlueDataModule(
-            pretrained_model=config.pretrained_model,
-            max_length=config.max_length,
-            batch_size=config.batch_size,
-            num_workers=config.num_workers,
-            debug_mode_sample=config.debug_mode_sample,
+            pretrained_model=config.trainer.pretrained_model,
+            max_length=config.trainer.max_length,
+            batch_size=config.trainer.batch_size,
+            num_workers=config.trainer.num_workers,
+            debug_mode_sample=config.trainer.debug_mode_sample,
         )
 
         # Wire up MLflow context manager to Azure ML.
-        mlflow.set_experiment(config.mlflow_experiment_name)
+        mlflow.set_experiment(config.trainer.mlflow_experiment_name)
 
         # Connect Lightning's MLFlowLogger plugin to azureml-mlflow as defined in the
         # context manager. TODO: MLflow metrics should show epochs rather than steps on
@@ -78,17 +77,17 @@ def run(config: "TrainerConfig") -> TransformerModule:
             callbacks=[
                 EarlyStopping(
                     monitor="Val_F1_Score",
-                    min_delta=config.min_delta,
-                    patience=config.patience,
+                    min_delta=config.trainer.min_delta,
+                    patience=config.trainer.patience,
                     verbose=True,
                     mode="max",
                 ),
                 checkpoint_callback,
             ],
-            default_root_dir=config.model_checkpoint_dir,
-            fast_dev_run=bool(config.debug_mode_sample),
-            max_epochs=config.max_epochs,
-            max_time=config.max_time,
+            default_root_dir=config.trainer.model_checkpoint_dir,
+            fast_dev_run=bool(config.trainer.debug_mode_sample),
+            max_epochs=config.trainer.max_epochs,
+            max_time=config.trainer.max_time,
             log_every_n_steps = 20,
             precision="bf16-mixed" if torch.cuda.is_available() else "32-true",
             logger=mlf_logger,
@@ -184,7 +183,7 @@ if __name__ == "__main__":
     # Free up gpu vRAM from memory leaks.
     torch.cuda.empty_cache()
     gc.collect()
-    model, data_module = run_tasks()
+    model, data_module = run()
 
 """     # Save model to ONNX format to the `onnx_path`.
     onnx_path = os.path.join(
