@@ -174,7 +174,7 @@ def run_tasks(config: Config) -> None:
 
     torch.distributed.init_process_group(backend=backend)
 
-    seed_everything(seed=config.seed, workers=True)
+    seed_everything(seed=config.lightningmodel.seed, workers=True)
 
     for task_name, task_config in config.tasks.items():
         logger.info(f"Running task: {task_name}")
