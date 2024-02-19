@@ -35,7 +35,8 @@ def run(config: "TrainerConfig") -> TransformerModule:
     TRACKING_SERVER_HOST="35.246.195.55"
     mlflow.set_tracking_uri(f"http://{TRACKING_SERVER_HOST}:5000")
     with activate_mlflow(experiment_name=experiment_name, run_id=run_id, run_name=run_name) as run:
-        """Train and checkpoint the model with highest F1; log that model to MLflow and
+
+       """Train and checkpoint the model with highest F1; log that model to MLflow and
         return it."""
         model = TransformerModule(
             pretrained_model=config.trainer.pretrained_model,
@@ -52,6 +53,7 @@ def run(config: "TrainerConfig") -> TransformerModule:
 
         # Wire up MLflow context manager to Azure ML.
         mlflow.set_experiment(config.trainer.mlflow_experiment_name)
+
 
         # Connect Lightning's MLFlowLogger plugin to azureml-mlflow as defined in the
         # context manager. TODO: MLflow metrics should show epochs rather than steps on
