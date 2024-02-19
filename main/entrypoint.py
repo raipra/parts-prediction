@@ -33,8 +33,8 @@ def run(config: "TrainerConfig") -> TransformerModule:
     run_id = config.infrastructure.mlflow.run_id
     run_name = config.infrastructure.mlflow.run_name
 
-    with activate_mlflow(experiment_name=experiment_name, run_id=run_id, run_name=run_name) as _:
-        log_artifacts_for_reproducibility()
+    with activate_mlflow(experiment_name=experiment_name, run_id=run_id, run_name=run_name) as run:
+
         """Train and checkpoint the model with highest F1; log that model to MLflow and
         return it."""
         model = TransformerModule(
@@ -52,6 +52,7 @@ def run(config: "TrainerConfig") -> TransformerModule:
 
         # Wire up MLflow context manager to Azure ML.
         mlflow.set_experiment(config.mlflow_experiment_name)
+
 
         # Connect Lightning's MLFlowLogger plugin to azureml-mlflow as defined in the
         # context manager. TODO: MLflow metrics should show epochs rather than steps on

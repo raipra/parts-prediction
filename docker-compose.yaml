@@ -38,6 +38,13 @@ services:
       - 5433:5432
     profiles:
       - ci
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   app-dev:
     <<: *APP_TEMPLATE
@@ -49,7 +56,13 @@ services:
       - 8001:8001
     profiles:
       - dev
-
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
   app-prod:
     <<: *APP_TEMPLATE
     container_name: parts-prediction-prod-container
