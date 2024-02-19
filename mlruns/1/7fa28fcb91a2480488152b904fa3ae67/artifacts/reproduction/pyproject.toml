@@ -26,7 +26,6 @@ peft = "~=0.8"
 polars = "~=0.20"
 sentencepiece = "==0.1.99"
 onnx = "==1.15.0"
-jupyterlab = "~=3.6.3"
 
 
 [tool.poetry.group.dev.dependencies]

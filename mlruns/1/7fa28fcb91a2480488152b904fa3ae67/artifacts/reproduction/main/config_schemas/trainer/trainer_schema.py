@@ -1,7 +1,5 @@
 from dataclasses import dataclass, field
 from typing import Optional
-from pathlib import Path
-import os
 
 from hydra.core.config_store import ConfigStore
 
@@ -49,27 +47,6 @@ class TrainerConfig(LoggableParamsMixin):
     sync_batchnorm: bool = True
     reload_dataloaders_every_n_epochs: int = 0
     default_root_dir: Optional[str] = "./data/pytorch-lightning"
-
-    pretrained_model: str = "roberta-base"
-    num_classes: int = 2
-    lr: float = 2e-4
-    max_length: int = 128
-    batch_size: int = 256
-    num_workers: int = os.cpu_count()
-    max_epochs: int = 10
-    debug_mode_sample: int | None = None
-    max_time: dict[str, float] = field(default_factory=lambda: {"hours": 3})
-    model_checkpoint_dir: str = os.path.join(
-        Path(__file__).parents[2],
-            "model-checkpoints",
-    )
-    min_delta: float = 0.005
-    patience: int = 4
-
-    # MLflow
-    mlflow_experiment_name: str = "FirstExperimemt"
-    mlflow_run_name: str = "onnx-gpu-run12"
-    mlflow_description: str = f"PEFT tune roberta-base to classify {mlflow_experiment_name}."
 
     def loggable_params(self) -> list[str]:
         return ["max_epochs", "max_steps", "strategy", "precision"]

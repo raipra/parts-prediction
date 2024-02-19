@@ -97,30 +97,30 @@ infrastructure:
         labels:
           project: parts-prediction
       vm_metadata_config:
-        instance_group_name: parts-prediction-experiment-None-20240212155757
-        docker_image: europe-west3-docker.pkg.dev/crucial-mender-411608/docker-registry/parts-prediction:train-61924FEC-9B12-4CB9-B543-C99286438355
+        instance_group_name: parts-prediction-experiment-None-20240212151813
+        docker_image: null
         zone: europe-west3-b
         python_hash_seed: 42
-        mlflow_tracking_uri: http://aiprojects-mlflow.europe-west3-a.c.crucial-mender-411608.internal:6100
+        mlflow_tracking_uri: localhost:6101
         node_count: 1
         disks: []
         etcd_ip: 10.164.0.12:2379
-      template_name: parts-prediction-experiment-None-20240212155757
+      template_name: parts-prediction-experiment-None-20240212151813
       project_id: crucial-mender-411608
       labels:
         project: parts-prediction
-    name: parts-prediction-experiment-None-20240212155757
+    name: parts-prediction-experiment-None-20240212151813
     node_count: 1
     project_id: crucial-mender-411608
     zone: europe-west3-b
   mlflow:
-    mlflow_external_tracking_uri: http://34.159.249.9:5000/
-    mlflow_internal_tracking_uri: http://aiprojects-mlflow.europe-west3-a.c.crucial-mender-411608.internal:6100
+    mlflow_external_tracking_uri: localhost:6101
+    mlflow_internal_tracking_uri: localhost:6101
     experiment_name: parts-prediction-experiment
     run_name: null
-    run_id: 4f78625dd652491c868a4711e2d7d613
+    run_id: 7fa28fcb91a2480488152b904fa3ae67
     experiment_id: '1'
-    experiment_url: http://34.159.249.9:5000//#/experiments/1/runs/4f78625dd652491c868a4711e2d7d613
-    artifact_uri: gs://pp-mlflow-artifacts/mlflow-artifact/1/4f78625dd652491c868a4711e2d7d613/artifacts
+    experiment_url: localhost:6101/#/experiments/1/runs/7fa28fcb91a2480488152b904fa3ae67
+    artifact_uri: file:///app/mlruns/1/7fa28fcb91a2480488152b904fa3ae67/artifacts
   etcd_ip: 10.164.0.12:2379
-docker_image: europe-west3-docker.pkg.dev/crucial-mender-411608/docker-registry/parts-prediction:train-61924FEC-9B12-4CB9-B543-C99286438355
+docker_image: null

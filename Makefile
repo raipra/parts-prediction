@@ -62,6 +62,10 @@ run-tasks: generate-final-config push
 local-run-tasks: local-generate-final-config
 	$(DOCKER_COMPOSE_EXEC) torchrun main/run_tasks.py
 
+## Local run tasks
+entry-point:
+	$(DOCKER_COMPOSE_EXEC) torchrun main/entrypoint.py
+
 ## Starts jupyter lab
 notebook: up
 	$(DOCKER_COMPOSE_EXEC) jupyter-lab --ip 0.0.0.0 --port 8888 --no-browser
