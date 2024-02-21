@@ -38,13 +38,7 @@ services:
       - 5433:5432
     profiles:
       - ci
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+      - dev
 
   app-dev:
     <<: *APP_TEMPLATE
@@ -84,3 +78,10 @@ services:
       - 8001:8001
     profiles:
       - ci
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
