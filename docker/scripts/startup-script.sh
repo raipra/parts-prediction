@@ -10,11 +10,11 @@ export PROD_MLFLOW_SERVER_PORT=5000
 
 export MLFLOW_ARTIFACT_STORE=gs://pp-mlflow-artifacts/mlflow-artifact
 export POSTGRESUSER=postgres
-export POSTGRESPWD=Postgres71090
+export POSTGRESPWD=postgres
 export POSTGRESDB=postgres
-export POSTGRES_IP=10.115.96.3
+export POSTGRES_IP=127.0.0.1
 export MLFLOW_BACKEND_STORE=postgresql://${POSTGRESUSER}:${POSTGRESPWD}@${POSTGRES_IP}:5432/${POSTGRESDB}
-
+export MLFLOW_TRACKING_URI=http://127.0.0.1:${PROD_MLFLOW_SERVER_PORT}
 mlflow server \
 --backend-store-uri "${MLFLOW_BACKEND_STORE}" \
 --default-artifact-root "${MLFLOW_ARTIFACT_STORE}" \
