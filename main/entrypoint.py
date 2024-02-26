@@ -20,7 +20,7 @@ from main.config_schemas.config_schema import Config
 from main.lightning_modules.transformer import TransformerModule
 from main.utils.config_utils import get_config
 from hydra.utils import instantiate
-from lightning.pytorch import seed_everything
+from lightning.pytorch import seed_everything``
 from main.utils.torch_utils import get_local_rank
 from main.utils.utils import get_logger
 from main.utils.mlflow_utils import activate_mlflow

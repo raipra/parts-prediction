@@ -25,7 +25,7 @@ echo "============= Installing Nvidia Drivers ==============="
 sudo apt update -y && sudo apt update -y && sudo apt install build-essential -y && sudo apt install linux-headers-$(uname -r) -y && sudo apt install nvidia-driver-535 -y
 
 echo "============= Downloading docker image ==============="
-gcloud auth configure-docker --quiet europe-west3-docker.pkg.dev
+gcloud auth configure-docker --quiet europe-west4-docker.pkg.dev
 time sudo docker pull "${DOCKER_IMAGE}"
 
 echo "============= TRAINING: start ==============="
