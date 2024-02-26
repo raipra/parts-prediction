@@ -55,5 +55,4 @@ RUN git config --global user.email "rai.prashanth@gmail.com" \
 COPY . /app/
 
 ENTRYPOINT [ "/bin/bash" ]
-CMD ["/startup-script.sh"]
 EXPOSE 6100 6101

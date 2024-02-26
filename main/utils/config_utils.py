@@ -57,6 +57,7 @@ def get_config_and_dict_config(config_path: str, config_name: str) -> Any:
 
     return main_decorator
 
+
 def save_config_as_yaml(config: Union["Config", DictConfig], save_path: str) -> None:
     text_io = StringIO()
     text_io.writelines(
@@ -92,7 +93,8 @@ def load_config_header() -> str:
 
     with open(config_header_path, "r") as f:
         return f.read()
-    
+
+
 def setup_config() -> None:
     config_schema.setup_config()
 

@@ -1,13 +1,11 @@
-
 from typing import TYPE_CHECKING, Union
-
-from lightning.pytorch import Trainer
 
 from cybulde.data_modules.data_modules import DataModule, PartialDataModuleType
 from cybulde.training.lightning_modules.bases import TrainingLightningModule
 from cybulde.training.tasks.bases import TrainingTask
 from cybulde.utils.io_utils import is_file
 from cybulde.utils.mlflow_utils import activate_mlflow, log_artifacts_for_reproducibility
+from lightning.pytorch import Trainer
 
 if TYPE_CHECKING:
     from cybulde.config_schemas.config_schema import Config

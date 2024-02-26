@@ -46,7 +46,9 @@ class InstanceTemplateCreatorConfig:
         ]
     )
     network: str = "https://www.googleapis.com/compute/v1/projects/new-ai-projects/global/networks/default"
-    subnetwork: str = "https://www.googleapis.com/compute/v1/projects/new-ai-projects/regions/europe-4/subnetworks/default"
+    subnetwork: str = (
+        "https://www.googleapis.com/compute/v1/projects/new-ai-projects/regions/europe-4/subnetworks/default"
+    )
     startup_script_path: str = "scripts/vm_startup/task_runner_startup_script.sh"
     vm_config: VMConfig = VMConfig()
     boot_disk_config: BootDiskConfig = BootDiskConfig()

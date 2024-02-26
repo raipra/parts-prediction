@@ -1,8 +1,10 @@
 import os
+
 from typing import Optional
 
 import polars as pl
 import torch
+
 from datasets import Dataset, DatasetDict, load_dataset
 from lightning import LightningDataModule
 from torch.utils.data import DataLoader
@@ -126,9 +128,7 @@ class LexGlueDataModule(LightningDataModule):
             batched=True,
             load_from_cache_file=True,
         )
-        tokenized_ds.set_format(
-            type="torch", columns=["input_ids", "attention_mask", "label"]
-        )
+        tokenized_ds.set_format(type="torch", columns=["input_ids", "attention_mask", "label"])
 
         return tokenized_ds
 

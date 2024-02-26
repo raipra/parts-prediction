@@ -1,7 +1,8 @@
-from dataclasses import dataclass, field
-from typing import Optional
-from pathlib import Path
 import os
+
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Optional
 
 from hydra.core.config_store import ConfigStore
 
@@ -17,8 +18,6 @@ class TrainerConfig(LoggableParamsMixin):
     devices: str = "auto"
     num_nodes: int = 1  # SI("${}")
     precision: str = "16-mixed"
-    logger: Optional[list[logger_schema.LoggerConfig]] = field(default_factory=lambda: [])  # type: ignore
-    callbacks: Optional[list[callback_schema.CallbackConfig]] = field(default_factory=lambda: [])  # type: ignore
     fast_dev_run: bool = False
     max_epochs: Optional[int] = None
     min_epochs: Optional[int] = None
@@ -55,13 +54,10 @@ class TrainerConfig(LoggableParamsMixin):
     lr: float = 2e-4
     max_length: int = 128
     batch_size: int = 256
-    num_workers: int = os.cpu_count()
-    max_epochs: int = 10
     debug_mode_sample: int | None = None
-    max_time: dict[str, float] = field(default_factory=lambda: {"hours": 3})
     model_checkpoint_dir: str = os.path.join(
         Path(__file__).parents[2],
-            "model-checkpoints",
+        "model-checkpoints",
     )
     min_delta: float = 0.005
     patience: int = 4

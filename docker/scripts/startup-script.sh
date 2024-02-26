@@ -22,3 +22,6 @@ mlflow server \
 --port "${PROD_MLFLOW_SERVER_PORT}"
 
 tail -F anythoig
+
+
+
