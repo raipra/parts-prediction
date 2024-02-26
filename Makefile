@@ -141,7 +141,7 @@ exec-in: up
 	docker exec -it $(CONTAINER_NAME) bash
 
 push: guard-IMAGE_TAG build
-	@gcloud auth configure-docker --quiet europe-west3-docker.pkg.dev
+	@gcloud auth configure-docker --quiet europe-west4-docker.pkg.dev
 	@docker tag "$${DOCKER_IMAGE_NAME}:latest" "$${GCP_DOCKER_REGISTRY_URL}:$${IMAGE_TAG}"
 	@docker push "$${GCP_DOCKER_REGISTRY_URL}:$${IMAGE_TAG}"
 

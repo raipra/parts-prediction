@@ -1,9 +1,9 @@
 IS_PROD_ENV=true
-GOOGLE_CLOUD_PROJECT=crucial-mender-411608
-VM_NAME=aiprojects-mlflow
-ZONE=europe-west3-a
+GOOGLE_CLOUD_PROJECT=new-ai-projects
+VM_NAME=mlflow-tracking-server-instance
+ZONE=us-east4-c
 MLFLOW_INTERNAL_TRACKING_URI=http://${VM_NAME}.${ZONE}.c.${GOOGLE_CLOUD_PROJECT}.internal:${PROD_MLFLOW_SERVER_PORT}
 
-MLFLOW_TRACKING_URI=http://34.89.225.230:5000
+MLFLOW_TRACKING_URI=http://34.85.149.5:5000
 
 

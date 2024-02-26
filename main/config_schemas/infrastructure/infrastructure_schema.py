@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional
 
 from hydra.core.config_store import ConfigStore
@@ -21,8 +21,8 @@ class MLFlowConfig:
 
 @dataclass
 class InfrastructureConfig:
-    project_id: str = "crucial-mender-411608"
-    zone: str = "europe-west3-b"
+    project_id: str = "new-ai-projects"
+    zone: str = "europe-west4-c"
     instance_group_creator: InstanceGroupCreatorConfig = InstanceGroupCreatorConfig()
     mlflow: MLFlowConfig = MLFlowConfig()
     etcd_ip: Optional[str] = "10.164.0.12:2379"

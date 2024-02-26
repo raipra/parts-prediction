@@ -8,8 +8,8 @@ from hydra.core.config_store import ConfigStore
 from omegaconf import MISSING
 from pydantic.dataclasses import dataclass
 
-from main.utils.mixin import LoggableParamsMixin
 from main.config_schemas.infrastructure import infrastructure_schema
+from main.utils.mixin import LoggableParamsMixin
 
 
 @dataclass
@@ -20,12 +20,11 @@ class LightningModuleConfig(LoggableParamsMixin):
 @dataclass
 class TransformerModuleConfig(LightningModuleConfig):
     _target_: str = ""
-    
+
     save_last_checkpoint_every_n_train_steps: int = 500
     seed: int = 1234
     registered_model_name: Optional[str] = None
     docker_image: Optional[str] = None
-
 
 
 @dataclass
@@ -50,13 +49,15 @@ class TrainerConfig:
     mlflow_experiment_name: str = "Lex-GLUE Terms of Service"
     mlflow_run_name: str = "onnx-gpu-run12"
     mlflow_description: str = f"PEFT tune roberta-base to classify {mlflow_experiment_name}."
+    mflow_tracking_server = "34.85.149.5"
+
 
 @dataclass
 class Config:
     trainer: TrainerConfig = TrainerConfig()
-    
+
     lightningmodel: TransformerModuleConfig = TransformerModuleConfig()
-    infrastructure: infrastructure_schema.InfrastructureConfig =  infrastructure_schema.InfrastructureConfig()
+    infrastructure: infrastructure_schema.InfrastructureConfig = infrastructure_schema.InfrastructureConfig()
     docker_image: Optional[str] = None
 
 
