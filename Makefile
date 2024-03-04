@@ -1,10 +1,11 @@
 # Make all targets .PHONY
 .PHONY: $(shell sed -n -e '/^$$/ { n ; /^[^ .\#][^ ]*:/ { s/:.*$$// ; p ; } ; }' $(MAKEFILE_LIST))
 
+include .envs/.postgres
 include .envs/.mlflow-common
 include .envs/.mlflow-dev
 include .envs/.infrastructure
-include .envs/.mlflow-prod
+
 
 export
 
