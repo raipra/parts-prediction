@@ -19,12 +19,9 @@ def run(config: "TrainerConfig") -> TransformerModule:
     experiment_name = config.infrastructure.mlflow.experiment_name
     run_id = config.infrastructure.mlflow.run_id
     run_name = config.infrastructure.mlflow.run_name
-    TRACKING_SERVER_HOST="35.246.195.55"
-    mlflow.set_tracking_uri(f"http://{TRACKING_SERVER_HOST}:5000")
+
     with activate_mlflow(experiment_name=experiment_name, run_id=run_id, run_name=run_name) as run:
-
         """Train and checkpoint the model with highest F1; log that model to MLflow and
-
         return it."""
         model = TransformerModule(
             pretrained_model=config.trainer.pretrained_model,
@@ -74,14 +71,11 @@ def run(config: "TrainerConfig") -> TransformerModule:
                 ),
                 checkpoint_callback,
             ],
-
             default_root_dir=config.trainer.model_checkpoint_dir,
             fast_dev_run=bool(config.trainer.debug_mode_sample),
             max_epochs=config.trainer.max_epochs,
             max_time=config.trainer.max_time,
-
             log_every_n_steps=20,
-
             precision="bf16-mixed" if torch.cuda.is_available() else "32-true",
             logger=mlf_logger,
         )
