@@ -75,10 +75,11 @@ def run(config: "TrainerConfig") -> TransformerModule:
                 checkpoint_callback,
             ],
 
-            default_root_dir=config.model_checkpoint_dir,
-            fast_dev_run=bool(config.debug_mode_sample),
-            max_epochs=config.max_epochs,
-            max_time=config.max_time,
+            default_root_dir=config.trainer.model_checkpoint_dir,
+            fast_dev_run=bool(config.trainer.debug_mode_sample),
+            max_epochs=config.trainer.max_epochs,
+            max_time=config.trainer.max_time,
+
             log_every_n_steps=20,
 
             precision="bf16-mixed" if torch.cuda.is_available() else "32-true",
